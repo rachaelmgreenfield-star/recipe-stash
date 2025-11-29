@@ -8,7 +8,8 @@ $(document).ready(function() {
   // extract which recipe from url anchor
   let baseFilename = window.location.hash;
   baseFilename = baseFilename.replace('#', '');
-  let filename = 'recipes/' + baseFilename + '.md';
+  const params = new URLSearchParams(window.location.search);
+  let filename = 'recipes/'+ params.get('category') + '/' + params.get('recipe') + '.md';
 
   // if there's a hero image available, load and display
   if (lookForHeroImage) {
@@ -128,11 +129,8 @@ $(document).ready(function() {
       });
     }, 
 
-    // no recipe listed or some problem?
-    // redirect to the main page
     error: function(xhr, status, err) {
       console.log(err);
-      window.location.href = 'index.php';
     }
   });
 
